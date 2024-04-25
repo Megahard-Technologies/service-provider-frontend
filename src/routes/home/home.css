@@ -1,0 +1,224 @@
+.container-home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.upper-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 98%;
+    height: 10%;
+    padding-left: 2%;
+}
+
+.name-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 18%;
+    height: 80%;
+    font-size: 2.2em;
+    background-color: #d4d4d4;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.lower-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 96%;
+    height: 90%;
+    padding: 0.5em;
+    gap:2%
+}
+
+.first-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+    height: 100%;
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.first-column .opinions {
+    height: 85%;
+    width: 90%;
+}
+
+.first-column h2, .second-column h2, .third-column h2 {
+    font-size: 2em;
+    font-weight: 400;
+    margin: 0.4em;
+}
+
+.second-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+    height: 100%;
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.second-column .events {
+    height: 85%;
+    width: 90%;
+}
+
+.second-column .add-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #528DFF;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    margin: 0.5em;
+    padding: 0;
+    border: none;
+}
+
+.third-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+    height: 100%;
+    border-radius: 10px;
+    gap:3em;
+}
+
+.third-column .first-row, .third-column .second-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    border-radius: 10px;
+    background-color: #d4d4d4;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.third-column .first-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.third-column .first-row h2 {
+    font-size: 1.5em;
+    font-weight: 400;
+    height:15%;
+    margin: 0.3em;
+
+}
+.third-column .second-row h2 {
+    font-size: 1.5em;
+    font-weight: 400;
+    height:10%;
+    margin: 0.3em;
+
+}
+
+.third-column .first-row .graph-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-bottom: 1em;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    padding: 0.5em;
+}
+
+.third-column .second-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    max-height: 100%;
+    max-width: 100%;
+
+}
+
+.third-column .second-row .send-button-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.third-column .second-row .send-button-div button {
+    background-color: #528DFF;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 0.5em;
+    margin-right: 2em;
+    margin-bottom: 0.7em;
+    cursor: pointer;
+    width: 7em;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.opinions {
+    overflow: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+}
+
+.opinions::-webkit-scrollbar, .events::-webkit-scrollbar {
+    width: 10px;
+}
+
+.opinions::-webkit-scrollbar-track, .events::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.opinions::-webkit-scrollbar-thumb, .events::-webkit-scrollbar-thumb{
+    background: #888;
+    border-radius: 10px;
+}
+
+.opinions::-webkit-scrollbar-thumb:hover, .events::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

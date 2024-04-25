@@ -1,0 +1,98 @@
+.event {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0 0 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+    width: 95%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.event .content {
+    /*border: 1px solid #ff0000;*/
+    width: 100%;
+
+}
+
+.event .buttons {
+    /*border: 1px solid #00f598;*/
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+}
+
+.event .buttons .edit-btn {
+    background-color: #FFC700;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 10em;
+    height: 2.5em;
+    margin: 0;
+}
+.event .buttons .delete-btn {
+    background-color: #FF0000;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 10em;
+    height: 2.5em;
+    margin: 0;
+}
+.event .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1em;
+}
+
+.event .content .first-column-event {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 60%;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.event .content .first-column-event h2 {
+    font-size: 1.2em;
+    font-weight: 400;
+    margin: 0;
+}
+
+.event .content .first-column-event .time {
+    font-size: 1em;
+    font-weight: 300;
+    color: #6D6D6D;
+    margin: 0.3em 0 0;
+}
+
+.event .content .second-column-event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    background-color: #d4d4d4;
+    border-radius: 10px;
+}
+
+.event .content .second-column-event img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}

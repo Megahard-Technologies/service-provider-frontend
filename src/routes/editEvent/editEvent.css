@@ -1,0 +1,98 @@
+.container-event {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    border: 0;
+}
+
+.container-event .event-div {
+    box-sizing: border-box;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    max-height: 620px;
+    border-radius: 10px;
+    padding: 2% 3%;
+    background-color: #d4d4d4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container-event .event-div h1 {
+    font-size: 2em;
+    font-weight: 600;
+    margin: 0;
+}
+
+
+.container-event .input-boxes {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 40em;
+    gap: 50px;
+}
+
+.container-event .left-input-boxes {
+    width: 50%;
+    /*border: 5px solid yellow;*/
+
+}
+
+.container-event .right-input-boxes {
+    width: 50%;
+    /*border: 5px solid green;*/
+}
+
+.first-row-event {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 20%;
+    gap: 50px;
+}
+
+.buttons-save-discard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 30%;
+    height: 65%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.buttons-save-discard button {
+    width: 100%;
+    height: 100%;
+    font-size: 1.2em;
+    font-weight: 500;
+    border: none;
+
+    background-color: white;
+    cursor: pointer;
+
+}
+
+.buttons-save-discard .save-button {
+    color: #0066FF;
+    border-right: 1px solid lightgray;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.buttons-save-discard .discard-button {
+    color: #FF0000;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}

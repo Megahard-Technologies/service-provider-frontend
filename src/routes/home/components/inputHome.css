@@ -1,0 +1,33 @@
+.input-home {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 14px 0;
+    cursor: pointer;
+    width: 90%;
+    height: 60%;
+    font-size: 1.4em;
+    gap: 3px;
+}
+
+.input-box-home {
+    height: 100%;
+    width: 99%;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.5);
+    text-align: left;
+    padding: 10px;
+}
+
+.textarea-home {
+    height: 100%;
+    width: 99%;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.5);
+    text-align: left;
+    resize: none;
+    padding-top: 10px;
+}
