@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import './bigInputAddEvent.css';
 interface InputBoxProps {
     label: string;
     value: string;
-    onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    error?: boolean;
+
 }
 
-const BigInputAddEvent: React.FC<InputBoxProps> = ({label, value, onChange}) => {
+const BigInputAddEvent: React.FC<InputBoxProps> = (props) => {
+    const inputClassName = props.error ? "input-box-big error" : "input-box-big";
     return (
         <div className="input-big">
-            <label>{label}</label>
-            <textarea className="textarea-home" value={value} onChange={onChange}/>
-
+            <label>{props.label}</label>
+            <input className={inputClassName} type="text" value={props.value} onChange={props.onChange}/>
         </div>
     );
 }

@@ -2,7 +2,7 @@ import './event.css';
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import Icon from '@mdi/react';
-import { mdiDelete, mdiPencil, mdiSend } from '@mdi/js';
+import { mdiDelete, mdiPencil} from '@mdi/js';
 
 
 interface Props {
@@ -11,19 +11,22 @@ interface Props {
     endDate: Date;
     image: string;
     description: string;
+    price: number;
 }
 
 const Event: React.FC<Props> = (props) => {
     const navigate = useNavigate();
+    const startDate = new Date(props.startDate);
+    const endDate = new Date(props.endDate);
     // Use your props here
-    console.log(props);
     return (
         <div className="event">
             <div className="content">
                 <div className="first-column-event">
                     <h2>{props.name}</h2>
-                    <p className="time">{props.startDate.getHours()}:{props.startDate.getMinutes() < 10 ? `0${props.startDate.getMinutes()}` : props.startDate.getMinutes()}
-                        - {props.endDate.getHours()}:{props.endDate.getMinutes() < 10 ? `0${props.endDate.getMinutes()}` : props.endDate.getMinutes()}</p>
+                    <p>{props.price} zł</p>
+                    <p className="time">{startDate.getHours()}:{startDate.getMinutes() < 10 ? `0${startDate.getMinutes()}` : startDate.getMinutes()}
+                        - {endDate.getHours()}:{endDate.getMinutes() < 10 ? `0${endDate.getMinutes()}` : endDate.getMinutes()}</p>
                     <p>{props.description}</p>
                 </div>
                 <div className="second-column-event">

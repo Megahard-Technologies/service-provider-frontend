@@ -222,3 +222,11 @@
 .opinions::-webkit-scrollbar-thumb:hover, .events::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+.events {
+    overflow: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+}
+
+
