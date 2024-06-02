@@ -27,7 +27,7 @@ function Login() {
             <div className="login-div">
                 <h1>Zaloguj się</h1>
                 <form className="input-boxes">
-                    <InputBox label="Email" value={email} onChange={handleUsernameChange} pass={false}/>
+                    <InputBox  label="Email" value={email} onChange={handleUsernameChange} pass={false}/>
                     <InputBox label="Hasło" value={password} onChange={handlePasswordChange} pass={true}/>
                     <button className="submit-btn" onClick={handleSubmit}>Zaloguj</button>
                     <p>Nie masz konta? <Link to="/register">Dołącz</Link>

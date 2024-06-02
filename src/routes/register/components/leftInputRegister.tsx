@@ -7,13 +7,14 @@ interface InputBoxProps {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputBox: React.FC<InputBoxProps> = ({ label, value, onChange }) => {
+const LeftInputBox: React.FC<InputBoxProps> = ({ label, value, onChange }) => {
     return (
-        <div className="input">
+        <div className="left-input-reg">
             <label>{label}</label>
-            <input className="input-box" type="text" value={value} onChange={onChange} />
+            <input className="left-input-box-reg" type="text" value={value} onChange={onChange} />
         </div>
     );
 }
 
-export default InputBox;
+
+export default LeftInputBox;

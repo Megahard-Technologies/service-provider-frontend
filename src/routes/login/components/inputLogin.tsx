@@ -9,9 +9,9 @@ interface InputBoxProps {
 
 const InputBox: React.FC<InputBoxProps> = ({ label, value, onChange , pass}) => {
     return (
-        <div className="input">
+        <div className="input-login">
             <label>{label}</label>
-            <input className="input-box" value={value} onChange={onChange} type={pass ? "password" : "text"}/>
+            <input className="input-box-login" value={value} onChange={onChange} type={pass ? "password" : "text"}/>
         </div>
     );
 }

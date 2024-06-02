@@ -1,6 +1,27 @@
-.container-register .input {
+.container-register .left-input-reg {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    cursor: pointer;
+    width: 99%;
+    height: 13%;
+    font-size: 1.4em;
+    gap: 5px;
+    margin-top: 40px;
+    /*border: 1px solid #0066FF;*/
+}
+
+.container-register .left-input-box-reg {
+    width: 99%;
+    height: 90%;
+    border: 1px solid #0066FF;
+    border-radius: 10px;
+    box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.container-register .right-input-reg {
+    display: flex;
     align-items: flex-start;
     flex-direction: column;
     cursor: pointer;
@@ -11,7 +32,7 @@
     /*border: 1px solid #0066FF;*/
 }
 
-.container-register .input-box {
+.container-register .right-input-box-reg {
     width: 99%;
     height: 90%;
     border: 1px solid #0066FF;
