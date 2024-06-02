@@ -5,7 +5,7 @@ import BigInput from "./components/bigInputRegister.tsx";
 import {useNavigate} from "react-router-dom";
 
 function RegisterPage() {
-    const [name, setName] = useState(''); // [state, setState
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
@@ -21,8 +21,8 @@ function RegisterPage() {
     };
 
     return (
-        <div className="container-register">
-            <div className="register-div">
+        <div className="register-container">
+            <div className="register-box">
                 <h1>Zarejestruj</h1>
                 <form className="input-boxes">
                     <div className="left-input-boxes">
@@ -42,8 +42,8 @@ function RegisterPage() {
                                   label="Adres"/>
                         <InputBox value={phone} onChange={(event) => setPhone(event.currentTarget.value)}
                                   label="Nr telefonu"/>
-                        <div className="submit-button-register-div">
-                            <button className="submit-btn-register" type="submit" onClick={handleSubmit}>Złóż wniosek
+                        <div className="register-submit-button-div">
+                            <button className="register-submit-btn" type="submit" onClick={handleSubmit}>Złóż wniosek
                             </button>
                         </div>
                     </div>
