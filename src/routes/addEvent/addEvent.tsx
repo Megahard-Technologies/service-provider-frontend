@@ -75,7 +75,7 @@ function AddEventPage() {
             endDate: endDate,
             serviceProviderId: serviceProviderId
         }
-        console.log("event: ", event);
+
         axios.post('http://localhost:3000/api/wydarzenia', event)
             .then(response => {
                 console.log(response.data);
@@ -117,6 +117,7 @@ function AddEventPage() {
                             onChange={(newDate) => setEndDate(newDate as Dayjs)}
                             ampm={false}
                             format="DD/MM/YYYY HH:MM"
+                            minutesStep={1}
                         />
                     </div>
 
