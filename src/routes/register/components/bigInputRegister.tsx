@@ -6,9 +6,9 @@ interface InputBoxProps {
     onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
 }
 
-const BigInput: React.FC<InputBoxProps> = ({label, value, onChange}) => {
+const BigInputReg: React.FC<InputBoxProps> = ({label, value, onChange}) => {
     return (
-        <div className="input-big">
+        <div className="input-big-reg">
             <label>{label}</label>
             {/*<input className="input-box" type="text" value={value} onChange={onChange}/>*/}
             <textarea className="textarea-register" value={value} onChange={onChange}/>
@@ -16,4 +16,4 @@ const BigInput: React.FC<InputBoxProps> = ({label, value, onChange}) => {
     );
 }
 
-export default BigInput;
+export default BigInputReg;

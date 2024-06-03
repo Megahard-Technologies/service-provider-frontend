@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, {ChangeEvent} from 'react';
 import "./inputAddEvent.css";
 
 interface InputBoxProps {
@@ -7,11 +7,12 @@ interface InputBoxProps {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputBoxAddEvent: React.FC<InputBoxProps> = ({ label, value, onChange }) => {
+const InputBoxAddEvent: React.FC<InputBoxProps> = ({label, value, onChange}) => {
+
     return (
-        <div className="input">
+        <div className={label === "Cena" ? "input-price" : "input"}>
             <label>{label}</label>
-            <input className="input-box" type="text" value={value} onChange={onChange} />
+            <input className="input-box" type="text" value={value} onChange={onChange}/>
         </div>
     );
 }

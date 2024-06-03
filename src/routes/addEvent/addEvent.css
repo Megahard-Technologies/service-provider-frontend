@@ -13,7 +13,7 @@
     border-bottom: 1px solid lightgray;
     border-right: 1px solid lightgray;
     width: 100%;
-    max-width: 1000px;
+    max-width: 600px;
     height: 100%;
     max-height: 620px;
     border-radius: 10px;
@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -35,22 +35,30 @@
 
 .container-event .input-boxes {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     height: 40em;
-    gap: 50px;
+    gap: 10px;
 }
 
-.container-event .left-input-boxes {
-    width: 50%;
-    /*border: 5px solid yellow;*/
-
+.container-event .input-boxes .date-pickers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.container-event .right-input-boxes {
-    width: 50%;
-    /*border: 5px solid green;*/
-}
+
+/*.container-event .left-input-boxes {*/
+/*    width: 70%;*/
+/*    !*border: 5px solid yellow;*!*/
+
+/*}*/
+
+/*.container-event .right-input-boxes {*/
+/*    width: 30%;*/
+/*    !*border: 5px solid green;*!*/
+/*}*/
 
 .first-row-event {
     display: flex;
@@ -97,18 +105,10 @@
     border-top-right-radius: 10px;
 }
 
-.calendar {
+.right-input-boxes {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 30em;
-    height: 28em;
-    background-color: white;
-    /*border: 1px solid green;*/
+    gap: 100px;
 }
 
-.calendar img {
-    width: 100%;
-    height: 100%;
-}

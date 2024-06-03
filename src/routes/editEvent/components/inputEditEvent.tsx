@@ -9,7 +9,7 @@ interface InputBoxProps {
 
 const InputBoxAddEvent: React.FC<InputBoxProps> = ({ label, value, onChange }) => {
     return (
-        <div className="input">
+        <div className={label === "Cena" ? "input-price" : "input"}>
             <label>{label}</label>
             <input className="input-box" type="text" value={value} onChange={onChange} />
         </div>

@@ -14,6 +14,8 @@ import AddEvent from "./routes/addEvent/addEvent.tsx";
 import About from "./routes/about/about.tsx";
 import EditAbout from "./routes/editAbout/editAbout.tsx";
 import CompleteRegistration from "./routes/completeRegistration/completeRegistration.tsx";
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 
 const router = createBrowserRouter([
     {
@@ -56,12 +58,14 @@ const router = createBrowserRouter([
     },
     {
         path: "/completeRegistration",
-        element: <CompleteRegistration />
+        element: <CompleteRegistration/>
     }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de">
+            <RouterProvider router={router}/>
+        </LocalizationProvider>
     </React.StrictMode>,
 )
