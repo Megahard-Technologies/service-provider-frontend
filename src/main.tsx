@@ -21,7 +21,7 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Register/>,
+        element: <Home/>,
         errorElement: <ErrorPage/>,
 
     },
