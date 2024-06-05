@@ -1,0 +1,39 @@
+/* fileInputAddEvent.css */
+
+.input-box-add-event-file {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.input-box-add-event-file label {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+
+}
+
+.input-box-add-event-file .input-file {
+    padding: 10px;
+    width: 97%;
+    height: 100%;
+    border: 1px solid #0066FF;
+    border-radius: 10px;
+    box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.5);
+    background-color: white;
+}
+
+.input-box-add-event-file p {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #666;
+}
+
+.input-box-add-event-file .input-file-error {
+    padding: 10px;
+    width: 97%;
+    height: 100%;
+    border: 1px solid #ff0000;
+    border-radius: 10px;
+    box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.5);
+    background-color: white;
+}

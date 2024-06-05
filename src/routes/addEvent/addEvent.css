@@ -112,3 +112,8 @@
     gap: 100px;
 }
 
+.input-box.error,
+.big-input-box.error,
+.file-input-box.error {
+    border: 1px solid red;
+}

@@ -4,35 +4,27 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    padding: 14px 0px;
-    width: 100%;
-    height: 30%;
+    width: 5em;
+    height: 100%;
     font-size: 1.4em;
     gap: 3px;
+    padding: 0;
+    margin-bottom: 0.5em;
 }
 
-.input-big label {
-    margin: 0;
-}
 
-.input-big .input-box {
-    width: 99%;
-    height: 100%;
-    border: 1px solid #0066FF;
+
+.input-box-big {
+    height: 4em;
+    width: 97%;
     border-radius: 10px;
-    box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.5);
-    text-align: left; /* aligns text to the left */
-    vertical-align: top;
-}
-
-.textarea-home {
-    height: 100%;
-    width: 99%;
-    border-radius: 10px;
-    border: none;
     box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.5);
     text-align: left; /* Aligns text to the left */
     resize: none; /* Prevents resizing */
     border: 1px solid #0066FF;
+    padding: 0 0.5em;
+}
 
+.error {
+    border: 1px solid #ff0000;
 }

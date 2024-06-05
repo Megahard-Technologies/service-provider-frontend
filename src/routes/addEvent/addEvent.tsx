@@ -3,9 +3,10 @@ import InputBoxAddEvent from "./components/inputAddEvent.tsx";
 import './addEvent.css';
 import BigInputAddEvent from "./components/bigInputAddEvent.tsx";
 import {useNavigate} from "react-router-dom";
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import dayjs, {Dayjs} from 'dayjs';
 import {DateTimePicker} from "@mui/x-date-pickers";
+import axios from "axios";
+import FileInputAddEvent from "./components/fileInputAddEvent.tsx";
 
 
 function AddEventPage() {
@@ -15,8 +16,79 @@ function AddEventPage() {
     const [image, setImage] = useState('');
     const [startDate, setStartDate] = useState(dayjs());
     const [endDate, setEndDate] = useState(dayjs());
+
+
+    const [nameError, setNameError] = useState(false);
+    const [descriptionError, setDescriptionError] = useState(false);
+    const [priceError, setPriceError] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
+
+    const serviceProviderId = 1;
     const navigate = useNavigate();
 
+    const validateForm = () => {
+        let isValid = true;
+
+        if (name.trim() === '') {
+            setNameError(true);
+            isValid = false;
+        } else {
+            setNameError(false);
+        }
+
+        if (description.trim() === '') {
+            setDescriptionError(true);
+            isValid = false;
+        } else {
+            setDescriptionError(false);
+        }
+
+        if (price.trim() === '' || isNaN(Number(price))) {
+            setPriceError(true);
+            isValid = false;
+        } else {
+            setPriceError(false);
+        }
+
+
+        if (image.trim() === '') {
+            setImageError(true);
+            isValid = false;
+        } else {
+            setImageError(false);
+        }
+
+        return isValid;
+    };
+
+    const postEvent = () => {
+        if (!validateForm()) {
+            console.log('form is not valid')
+            return;
+        }
+
+        const base64Image = image.split(',')[1];
+
+        const event = {
+            name: name,
+            description: description,
+            price: price,
+            image: base64Image,
+            startDate: startDate,
+            endDate: endDate,
+            serviceProviderId: serviceProviderId
+        }
+        console.log("image: ", base64Image)
+        axios.post('http://localhost:3000/api/wydarzenia', event)
+            .then(response => {
+                console.log(response.data);
+                navigate("/home")
+            })
+            .catch(error => {
+                console.error('error posting event: ', error)
+            })
+    }
 
     return (
         <div className="container-event">
@@ -24,23 +96,19 @@ function AddEventPage() {
                 <div className="first-row-event">
                     <h1>Dodaj Ofertę/Event</h1>
                     <div className="buttons-save-discard">
-                        <button className="save-button" onClick={() => {
-                            navigate("/home")
-                        }}>Zapisz
-                        </button>
-                        <button className="discard-button" onClick={() => {
-                            navigate("/home")
-                        }}>Odrzuć
-                        </button>
+
+                        <button className="save-button" onClick={postEvent}>Zapisz</button>
+                        <button className="discard-button" onClick={() => navigate("/home")}>Odrzuć</button>
+
                     </div>
                 </div>
                 <form className="input-boxes">
                     <InputBoxAddEvent value={name} onChange={(event) => setName(event.currentTarget.value)}
-                                      label="Nazwa"/>
+
+                                      label="Nazwa" error={nameError}/>
                     <BigInputAddEvent value={description}
                                       onChange={(event) => setDescription(event.currentTarget.value)}
-                                      label="Opis usług"/>
-
+                                      label="Opis usług" error={descriptionError}/>
                     <div className="date-pickers">
                         <DateTimePicker
                             label="Data rozpoczęcia"
@@ -49,6 +117,7 @@ function AddEventPage() {
                             format="DD/MM/YYYY HH:MM"
                             ampm={false}
                         />
+
 
                         <DateTimePicker
                             label="Data zakończenia"
@@ -60,9 +129,9 @@ function AddEventPage() {
                     </div>
 
                     <InputBoxAddEvent value={price} onChange={(event) => setPrice(event.currentTarget.value)}
-                                      label="Cena"/>
-                    <InputBoxAddEvent value={image} onChange={(event) => setImage(event.currentTarget.value)}
-                                      label="Dodaj zdjęcie"/>
+
+                                      label="Cena" error={priceError}/>
+                    <FileInputAddEvent onChange={(base64: string) => setImage(base64)} label="Dodaj zdjęcie" error={imageError}/>
 
                 </form>
             </div>

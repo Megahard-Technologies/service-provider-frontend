@@ -4,15 +4,41 @@ import Event from "./components/event.tsx";
 import {mdiPlus, mdiSend} from '@mdi/js';
 import Icon from "@mdi/react";
 import {LineGraph} from "./components/graph.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import InputBoxHome from "./components/inputHome.tsx";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
+interface event {
+    id: number;
+    name: string;
+    startDate: Date;
+    endDate: Date;
+    image: string;
+    description: string;
+    price: number;
+}
 
 function Home() {
     const name = "Zatoka smaku";
     const [message, setMessage] = useState('');
+    const [events, setEvents] = useState<event[]>([]);
+    const [eventsUpdated, setEventsUpdated] = useState(false); // New state
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/wydarzenia')
+            .then(response => {
+                setEvents(response.data);
+            })
+            .catch(error => {
+                console.error('error fetching events: ', error)
+            })
+        setEventsUpdated(false); // Reset eventsUpdated after fetching events
+    }, [eventsUpdated]);
+
+
 
     return (
         <div className="container-home">
@@ -36,10 +62,13 @@ function Home() {
                 <div className="second-column">
                     <h2>Oferty/Wydarzenia</h2>
                     <div className="events">
-                        <Event name={"Duża kawa"} startDate={new Date(2024, 4, 15, 13, 0, 0, 0)}
-                               endDate={new Date(2024, 4, 15, 14, 0, 0, 0)} image={"src/routes/home/img/kawa.jpg"}
-                               description={"\n" +
-                                   "Zanurz się w bogatym smaku i aromacie dużego kubka kawy za zaledwie 5 złotych, aby zacząć dzień pełen energii i radości."}/>
+                        {events.map((event, index) => {
+                            console.log(event.id)
+                            return <Event key={index} id={event.id} name={event.name} startDate={event.startDate}
+                                          endDate={event.endDate}
+                                          image={event.image} description={event.description} price={event.price}
+                                          setEventsUpdated={setEventsUpdated}/>
+                        })}
                     </div>
 
                     <button className="add-icon" onClick={() => navigate("/addEvent")}>
@@ -61,7 +90,8 @@ function Home() {
                         <h2>Napisz do admina</h2>
                         <InputBoxHome label="" value={message} onChange={(e) => setMessage(e.currentTarget.value)}/>
                         <div className="send-button-div">
-                            <button className="send-button" onClick={() => setMessage("")}><Icon path={mdiSend} size={0.8} />
+                            <button className="send-button" onClick={() => setMessage("")}><Icon path={mdiSend}
+                                                                                                 size={0.8}/>
                             </button>
                         </div>
                     </div>

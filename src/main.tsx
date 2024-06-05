@@ -17,6 +17,7 @@ import CompleteRegistration from "./routes/completeRegistration/completeRegistra
 import {LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -69,3 +70,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </LocalizationProvider>
     </React.StrictMode>,
 )
+
