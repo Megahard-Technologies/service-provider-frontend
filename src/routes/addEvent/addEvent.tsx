@@ -8,6 +8,7 @@ import {DateTimePicker} from "@mui/x-date-pickers";
 import axios from "axios";
 import FileInputAddEvent from "./components/fileInputAddEvent.tsx";
 
+
 function AddEventPage() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -15,6 +16,7 @@ function AddEventPage() {
     const [image, setImage] = useState('');
     const [startDate, setStartDate] = useState(dayjs());
     const [endDate, setEndDate] = useState(dayjs());
+
 
     const [nameError, setNameError] = useState(false);
     const [descriptionError, setDescriptionError] = useState(false);
@@ -94,12 +96,15 @@ function AddEventPage() {
                 <div className="first-row-event">
                     <h1>Dodaj Ofertę/Event</h1>
                     <div className="buttons-save-discard">
+
                         <button className="save-button" onClick={postEvent}>Zapisz</button>
                         <button className="discard-button" onClick={() => navigate("/home")}>Odrzuć</button>
+
                     </div>
                 </div>
                 <form className="input-boxes">
                     <InputBoxAddEvent value={name} onChange={(event) => setName(event.currentTarget.value)}
+
                                       label="Nazwa" error={nameError}/>
                     <BigInputAddEvent value={description}
                                       onChange={(event) => setDescription(event.currentTarget.value)}
@@ -113,19 +118,21 @@ function AddEventPage() {
                             ampm={false}
                         />
 
+
                         <DateTimePicker
                             label="Data zakończenia"
                             value={endDate}
                             onChange={(newDate) => setEndDate(newDate as Dayjs)}
                             ampm={false}
                             format="DD/MM/YYYY HH:MM"
-                            minutesStep={1}
                         />
                     </div>
 
                     <InputBoxAddEvent value={price} onChange={(event) => setPrice(event.currentTarget.value)}
+
                                       label="Cena" error={priceError}/>
                     <FileInputAddEvent onChange={(base64: string) => setImage(base64)} label="Dodaj zdjęcie" error={imageError}/>
+
                 </form>
             </div>
         </div>

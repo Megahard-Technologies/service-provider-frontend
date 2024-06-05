@@ -15,7 +15,7 @@
     width: 100%;
     max-width: 1000px;
     height: 100%;
-    max-height: 620px;
+    max-height: 720px;
     border-radius: 10px;
     padding: 2% 3%;
     background-color: #d4d4d4;
@@ -51,8 +51,18 @@
     /*border: 5px solid green;*/
 }
 
+.right-input-boxes-reg{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    width: 50%;
+    height: 87%;
+    gap: 40px;
+    margin-top: 42px;
+}
+
 .submit-button-register-div {
-    height: 15%;
+    height: 0%;
     width: 99%;
     display: flex;
     justify-content: center;

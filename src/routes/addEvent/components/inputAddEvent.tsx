@@ -8,6 +8,7 @@ interface InputBoxProps {
     error?: boolean;
 }
 
+
 const InputBoxAddEvent: React.FC<InputBoxProps> = (props: InputBoxProps) => {
 
     const inputClassName = props.error ? "input-box error" : "input-box";
@@ -16,6 +17,7 @@ const InputBoxAddEvent: React.FC<InputBoxProps> = (props: InputBoxProps) => {
         <div className={props.label === "Cena" ? "input-price" : "input"}>
             <label>{props.label}</label>
             <input className={inputClassName} type="text" value={props.value} onChange={props.onChange}/>
+
         </div>
     );
 }
