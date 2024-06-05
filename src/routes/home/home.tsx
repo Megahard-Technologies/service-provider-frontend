@@ -10,6 +10,7 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
 interface event {
+    id: number;
     name: string;
     startDate: Date;
     endDate: Date;
@@ -22,6 +23,8 @@ function Home() {
     const name = "Zatoka smaku";
     const [message, setMessage] = useState('');
     const [events, setEvents] = useState<event[]>([]);
+    const [eventsUpdated, setEventsUpdated] = useState(false); // New state
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,7 +35,8 @@ function Home() {
             .catch(error => {
                 console.error('error fetching events: ', error)
             })
-    }, []);
+        setEventsUpdated(false); // Reset eventsUpdated after fetching events
+    }, [eventsUpdated]);
 
 
 
@@ -59,9 +63,11 @@ function Home() {
                     <h2>Oferty/Wydarzenia</h2>
                     <div className="events">
                         {events.map((event, index) => {
-                            return <Event key={index} name={event.name} startDate={event.startDate}
+                            console.log(event.id)
+                            return <Event key={index} id={event.id} name={event.name} startDate={event.startDate}
                                           endDate={event.endDate}
-                                          image={event.image} description={event.description} price={event.price}/>
+                                          image={event.image} description={event.description} price={event.price}
+                                          setEventsUpdated={setEventsUpdated}/>
                         })}
                     </div>
 

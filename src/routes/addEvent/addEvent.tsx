@@ -66,16 +66,18 @@ function AddEventPage() {
             return;
         }
 
+        const base64Image = image.split(',')[1];
+
         const event = {
             name: name,
             description: description,
             price: price,
-            image: image,
+            image: base64Image,
             startDate: startDate,
             endDate: endDate,
             serviceProviderId: serviceProviderId
         }
-
+        console.log("image: ", base64Image)
         axios.post('http://localhost:3000/api/wydarzenia', event)
             .then(response => {
                 console.log(response.data);
