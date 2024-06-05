@@ -33,21 +33,20 @@ function Home() {
     const [opinions, setOpinions] = useState<opinion[]>([]); // New state
     const [loading, setLoading] = useState(true); // Single state for both sections
     const [eventsUpdated, setEventsUpdated] = useState(false); // State to track events updates
-  
+
     const navigate = useNavigate();
 
     const serviceProviderId = 1;
 
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/wydarzenia');
+        axios.get('http://localhost:3000/api/wydarzenia')
+            .then(response => {
                 setEvents(response.data);
             })
             .catch(error => {
                 console.error('error fetching events: ', error)
             })
-          
         axios.get(`http://localhost:3000/api/opinions/${serviceProviderId}`)
             .then(response => {
                 setOpinions(response.data);
@@ -57,17 +56,10 @@ function Home() {
             })
 
 
-        fetchData();
-        setEventsUpdated(false); 
-
-        // Set a timeout to ensure minimum loading time of 5 seconds
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 3000);
-
-        // Clean up the timeout if the component unmounts
-        return () => clearTimeout(timer);
+        setLoading(false); // Set loading to false after fetching data
+        setEventsUpdated(false); // Reset eventsUpdated after fetching events
     }, [eventsUpdated]);
+
 
     return (
         <div className="container-home">
@@ -83,10 +75,10 @@ function Home() {
                         {loading ? (
                             <LoadingSpinner />
                         ) : (
-                            {opinions.map((opinion, index) => {
-                            return <Opinion key={index} stars={opinion.stars} description={opinion.description}
-                                            date={opinion.date}/>
-                        })}
+                            opinions.map((opinion, index) => {
+                                return <Opinion key={index} stars={opinion.stars} description={opinion.description}
+                                                date={opinion.date} />
+                            })
                         )}
                     </div>
                 </div>
