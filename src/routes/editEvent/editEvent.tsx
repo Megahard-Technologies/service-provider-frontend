@@ -8,7 +8,7 @@ import {DateTimePicker} from "@mui/x-date-pickers";
 import axios from "axios";
 import FileInputAddEvent from "../addEvent/components/fileInputAddEvent.tsx";
 
-function AddEventPage() {
+function EditEventPage() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -130,4 +130,4 @@ function AddEventPage() {
     );
 }
 
-export default AddEventPage;
+export default EditEventPage;
