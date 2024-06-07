@@ -23,7 +23,7 @@ import {store} from "./state/store.ts";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Register/>,
+        element: <Home/>,
         errorElement: <ErrorPage/>,
 
     },

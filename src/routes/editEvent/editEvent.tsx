@@ -1,21 +1,65 @@
 import {useEffect, useState} from 'react';
-import InputBoxAddEvent from "./components/inputEditEvent.tsx";
-import './editEvent.css';
-import BigInputAddEvent from "./components/bigInputEditEvent.tsx";
+import InputBoxAddEvent from "../addEvent/components/inputAddEvent.tsx";
+import '../addEvent/addEvent.css';
+import BigInputAddEvent from "../addEvent/components/bigInputAddEvent.tsx";
 import {useNavigate} from "react-router-dom";
-import dayjs, {Dayjs} from "dayjs";
+import dayjs, {Dayjs} from 'dayjs';
 import {DateTimePicker} from "@mui/x-date-pickers";
 import {useSelector} from "react-redux";
 import {RootState} from "../../state/store.ts";
 import axios from "axios";
 
+import FileInputAddEvent from "../addEvent/components/fileInputAddEvent.tsx";
+
 function EditEventPage() {
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
     const [image, setImage] = useState('');
     const [startDate, setStartDate] = useState(dayjs());
     const [endDate, setEndDate] = useState(dayjs());
+  
+    const [nameError, setNameError] = useState(false);
+    const [descriptionError, setDescriptionError] = useState(false);
+    const [priceError, setPriceError] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
+
+    const serviceProviderId = 1;
+    const navigate = useNavigate();
+
+    const validateForm = () => {
+        let isValid = true;
+
+        if (name.trim() === '') {
+            setNameError(true);
+            isValid = false;
+        } else {
+            setNameError(false);
+        }
+
+        if (description.trim() === '') {
+            setDescriptionError(true);
+            isValid = false;
+        } else {
+            setDescriptionError(false);
+        }
+
+        if (price.trim() === '' || isNaN(Number(price))) {
+            setPriceError(true);
+            isValid = false;
+        } else {
+            setPriceError(false);
+        }
+        if (image.trim() === '') {
+            setImageError(true);
+            isValid = false;
+        } else {
+            setImageError(false);
+        }
+
+        return isValid;
+    };
 
     const editEventId = useSelector((state: RootState) => state.editEventId.editEventId);
     console.log(editEventId);
@@ -64,24 +108,16 @@ function EditEventPage() {
                 <div className="first-row-event">
                     <h1>Edytuj Ofertę/Event</h1>
                     <div className="buttons-save-discard">
-                        <button className="save-button" onClick={
-                            handleSave
-                        }>Zapisz
-                        </button>
-                        <button className="discard-button" onClick={() => {
-                            navigate("/home")
-                        }}>Odrzuć
-                        </button>
+                        <button className="save-button" onClick={handleSave}>Zapisz</button>
+                        <button className="discard-button" onClick={() => navigate("/home")}>Odrzuć</button>
                     </div>
                 </div>
                 <form className="input-boxes">
-                    {/*<div className="left-input-boxes">*/}
                     <InputBoxAddEvent value={name} onChange={(event) => setName(event.currentTarget.value)}
-                                      label="Nazwa"/>
+                                      label="Nazwa" error={nameError}/>
                     <BigInputAddEvent value={description}
                                       onChange={(event) => setDescription(event.currentTarget.value)}
-                                      label="Opis usług"/>
-
+                                      label="Opis usług" error={descriptionError}/>
                     <div className="date-pickers">
                         <DateTimePicker
                             label="Data rozpoczęcia"
@@ -97,18 +133,13 @@ function EditEventPage() {
                             onChange={(newDate) => setEndDate(newDate as Dayjs)}
                             ampm={false}
                             format="DD/MM/YYYY HH:MM"
+                            minutesStep={1}
                         />
                     </div>
 
                     <InputBoxAddEvent value={price} onChange={(event) => setPrice(event.currentTarget.value)}
-                                      label="Cena"/>
-                    <InputBoxAddEvent value={image} onChange={(event) => setImage(event.currentTarget.value)}
-                                      label="Dodaj zdjęcie"/>
-
-                    {/*</div>*/}
-                    {/*<div className="right-input-boxes">*/}
-
-                    {/*</div>*/}
+                                      label="Cena" error={priceError}/>
+                    <FileInputAddEvent onChange={(base64: string) => setImage(base64)} label="Dodaj zdjęcie" error={imageError}/>
                 </form>
             </div>
         </div>
