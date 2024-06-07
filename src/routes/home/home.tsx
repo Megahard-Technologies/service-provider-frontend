@@ -24,39 +24,28 @@ function Home() {
     const name = "Zatoka smaku";
     const [message, setMessage] = useState('');
     const [events, setEvents] = useState<event[]>([]);
-    const [loading, setLoading] = useState(true); // New state for loading
-    const [eventsUpdated, setEventsUpdated] = useState(false);
-    const [minimumLoadingTime, setMinimumLoadingTime] = useState(true); // New state for minimum loading time
+    const [loadingEvents, setLoadingEvents] = useState(true); // New state for loading events
+    const [loadingOpinions, setLoadingOpinions] = useState(true); // New state for loading opinions
+    const [eventsUpdated, setEventsUpdated] = useState(false); // State to track events updates
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/wydarzenia');
+        axios.get('http://localhost:3000/api/wydarzenia')
+            .then(response => {
                 setEvents(response.data);
-                setLoading(false); // Data fetched, stop loading
-            } catch (error) {
+                setLoadingEvents(false); // Data fetched, stop loading events
+            })
+            .catch(error => {
                 console.error('error fetching events: ', error);
-                setLoading(false); // Even on error, stop loading
-            }
-        };
-
-        fetchData();
+                setLoadingEvents(false); // Even on error, stop loading events
+            });
         setEventsUpdated(false); // Reset eventsUpdated after fetching events
 
-        // Set a timeout to ensure minimum loading time of 5 seconds
-        const timer = setTimeout(() => {
-            setMinimumLoadingTime(false);
+        // Simulate a delay for opinions loading (for example purposes)
+        setTimeout(() => {
+            setLoadingOpinions(false); // Stop loading opinions after a delay
         }, 5000);
-
-        // Clean up the timeout if the component unmounts
-        return () => clearTimeout(timer);
     }, [eventsUpdated]);
-
-    // Show spinner while loading or if minimum loading time has not passed
-    if (loading || minimumLoadingTime) {
-        return <LoadingSpinner />;
-    }
 
     return (
         <div className="container-home">
@@ -69,23 +58,33 @@ function Home() {
                 <div className="first-column">
                     <h2>Opinie klientów</h2>
                     <div className="opinions">
-                        <Opinion name={"Jarek S."} stars={4}
-                                 description={"To zdecydowanie jedna z tych Zatok, do której trzeba przycumować, gdy organizm zaczyna dopominać się smacznego jedzonka po intensywnym treningu. Jedzenie przede wszystkim bardzo dobrej jakości i w całkiem sporych porcjach, żadne tam mrożonki z Biedro. "}/>
-                        <Opinion name={"Ola B."} stars={5}
-                                 description={"Przychodzę tutaj od trzech lat, średnio dwa razy w tygodniu. Żeby jako zmęczony i głodny student zjeść hot dogi i wypić kawę. Najczęściej na zmianę Dawida i Asi których serdecznie pozdrawiam bo są super i robią super kawę, kolejny powód dla którego warto tutaj przyjść."}/>
-                        <Opinion name={"Adam C."} stars={4}
-                                 description={"Jako studentka przychodzę często do Zatoki smaku na kawę. Uważam, że posiadają bardzo pyszne ziarna. Polecam dla smakoszy słodkiego Moche. Obsłuaga także bardzo zadawalająca, miła, komunikatywna i przyjemna. Najbardziej polecam zmianę Asi i Dawida ;)"}/>
+                        {loadingOpinions ? (
+                            <LoadingSpinner />
+                        ) : (
+                            <>
+                                <Opinion name={"Jarek S."} stars={4}
+                                         description={"To zdecydowanie jedna z tych Zatok, do której trzeba przycumować, gdy organizm zaczyna dopominać się smacznego jedzonka po intensywnym treningu. Jedzenie przede wszystkim bardzo dobrej jakości i w całkiem sporych porcjach, żadne tam mrożonki z Biedro. "}/>
+                                <Opinion name={"Ola B."} stars={5}
+                                         description={"Przychodzę tutaj od trzech lat, średnio dwa razy w tygodniu. Żeby jako zmęczony i głodny student zjeść hot dogi i wypić kawę. Najczęściej na zmianę Dawida i Asi których serdecznie pozdrawiam bo są super i robią super kawę, kolejny powód dla którego warto tutaj przyjść."}/>
+                                <Opinion name={"Adam C."} stars={4}
+                                         description={"Jako studentka przychodzę często do Zatoki smaku na kawę. Uważam, że posiadają bardzo pyszne ziarna. Polecam dla smakoszy słodkiego Moche. Obsłuaga także bardzo zadawalająca, miła, komunikatywna i przyjemna. Najbardziej polecam zmianę Asi i Dawida ;)"}/>
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className="second-column">
                     <h2>Oferty/Wydarzenia</h2>
                     <div className="events">
-                        {events.map((event, index) => {
-                            return <Event key={index} id={event.id} name={event.name} startDate={event.startDate}
-                                          endDate={event.endDate}
-                                          image={event.image} description={event.description} price={event.price}
-                                          setEventsUpdated={setEventsUpdated} />
-                        })}
+                        {loadingEvents ? (
+                            <LoadingSpinner />
+                        ) : (
+                            events.map((event, index) => {
+                                return <Event key={index} id={event.id} name={event.name} startDate={event.startDate}
+                                              endDate={event.endDate}
+                                              image={event.image} description={event.description} price={event.price}
+                                              setEventsUpdated={setEventsUpdated} />
+                            })
+                        )}
                     </div>
 
                     <button className="add-icon" onClick={() => navigate("/addEvent")}>
