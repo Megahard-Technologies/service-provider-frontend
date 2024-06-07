@@ -13,9 +13,6 @@ interface Props {
 }
 
 const Opinion: React.FC<Props> = (props) => {
-    // Use your props here
-    console.log(typeof(props.date))
-
     return (
         <div className="opinion">
             <h3>{props.date.toString()}</h3>
