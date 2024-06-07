@@ -24,27 +24,30 @@ function Home() {
     const name = "Zatoka smaku";
     const [message, setMessage] = useState('');
     const [events, setEvents] = useState<event[]>([]);
-    const [loadingEvents, setLoadingEvents] = useState(true); // New state for loading events
-    const [loadingOpinions, setLoadingOpinions] = useState(true); // New state for loading opinions
+    const [loading, setLoading] = useState(true); // Single state for both sections
     const [eventsUpdated, setEventsUpdated] = useState(false); // State to track events updates
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/wydarzenia')
-            .then(response => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/wydarzenia');
                 setEvents(response.data);
-                setLoadingEvents(false); // Data fetched, stop loading events
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('error fetching events: ', error);
-                setLoadingEvents(false); // Even on error, stop loading events
-            });
+            }
+        };
+
+        fetchData();
         setEventsUpdated(false); // Reset eventsUpdated after fetching events
 
-        // Simulate a delay for opinions loading (for example purposes)
-        setTimeout(() => {
-            setLoadingOpinions(false); // Stop loading opinions after a delay
-        }, 5000);
+        // Set a timeout to ensure minimum loading time of 5 seconds
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 3000);
+
+        // Clean up the timeout if the component unmounts
+        return () => clearTimeout(timer);
     }, [eventsUpdated]);
 
     return (
@@ -58,7 +61,7 @@ function Home() {
                 <div className="first-column">
                     <h2>Opinie klientów</h2>
                     <div className="opinions">
-                        {loadingOpinions ? (
+                        {loading ? (
                             <LoadingSpinner />
                         ) : (
                             <>
@@ -75,7 +78,7 @@ function Home() {
                 <div className="second-column">
                     <h2>Oferty/Wydarzenia</h2>
                     <div className="events">
-                        {loadingEvents ? (
+                        {loading ? (
                             <LoadingSpinner />
                         ) : (
                             events.map((event, index) => {
