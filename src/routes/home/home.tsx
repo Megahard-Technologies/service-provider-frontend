@@ -24,7 +24,6 @@ function Home() {
     const [message, setMessage] = useState('');
     const [events, setEvents] = useState<event[]>([]);
     const [eventsUpdated, setEventsUpdated] = useState(false); // New state
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -62,6 +61,7 @@ function Home() {
                 <div className="second-column">
                     <h2>Oferty/Wydarzenia</h2>
                     <div className="events">
+
                         {events.map((event, index) => {
                             return <Event key={index} id={event.id} name={event.name} startDate={event.startDate}
                                           endDate={event.endDate}
