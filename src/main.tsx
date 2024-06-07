@@ -16,6 +16,8 @@ import EditAbout from "./routes/editAbout/editAbout.tsx";
 import CompleteRegistration from "./routes/completeRegistration/completeRegistration.tsx";
 import {LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
+import {Provider} from "react-redux";
+import {store} from "./state/store.ts";
 
 
 const router = createBrowserRouter([
@@ -65,9 +67,11 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de">
-            <RouterProvider router={router}/>
-        </LocalizationProvider>
+        <Provider store={store}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de">
+                <RouterProvider router={router}/>
+            </LocalizationProvider>
+        </Provider>
     </React.StrictMode>,
 )
 

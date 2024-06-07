@@ -4,6 +4,9 @@ import {useNavigate} from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiDelete, mdiPencil} from '@mdi/js';
 import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../state/store.ts";
+import {setEditEventId} from "../../../state/editEventId/editEventIdSlice.ts";
 
 
 interface Props {
@@ -23,6 +26,9 @@ const Event: React.FC<Props> = (props) => {
     const startDate = new Date(props.startDate);
     const endDate = new Date(props.endDate);
 
+    const editEventId = useSelector((state: RootState) => state.editEventId.editEventId);
+    const dispatch = useDispatch();
+
     const handleDelete = () => {
         //delete event
         axios.delete(`http://localhost:3000/api/wydarzenia/${props.id}`)
@@ -34,6 +40,11 @@ const Event: React.FC<Props> = (props) => {
             .catch(error => {
                 console.error('error deleting event: ', error)
             })
+    }
+
+    const handleEdit = () => {
+        dispatch(setEditEventId(props.id));
+        navigate("/editEvent");
     }
 
 
@@ -52,7 +63,7 @@ const Event: React.FC<Props> = (props) => {
                 </div>
             </div>
             <div className="buttons">
-                <button className="edit-btn" onClick={() => navigate("/editEvent")}><Icon path={mdiPencil} size={1} />
+                <button className="edit-btn" onClick={handleEdit}><Icon path={mdiPencil} size={1} />
                 </button>
                 <button className="delete-btn" onClick={handleDelete}><Icon path={mdiDelete} size={1} />
                 </button>
