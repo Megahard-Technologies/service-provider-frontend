@@ -63,7 +63,6 @@ function Home() {
                     <h2>Oferty/Wydarzenia</h2>
                     <div className="events">
                         {events.map((event, index) => {
-                            console.log(event.id)
                             return <Event key={index} id={event.id} name={event.name} startDate={event.startDate}
                                           endDate={event.endDate}
                                           image={event.image} description={event.description} price={event.price}

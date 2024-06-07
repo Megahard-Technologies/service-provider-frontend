@@ -1,21 +1,24 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import InputBoxAddEvent from "../addEvent/components/inputAddEvent.tsx";
 import '../addEvent/addEvent.css';
 import BigInputAddEvent from "../addEvent/components/bigInputAddEvent.tsx";
 import {useNavigate} from "react-router-dom";
 import dayjs, {Dayjs} from 'dayjs';
 import {DateTimePicker} from "@mui/x-date-pickers";
+import {useSelector} from "react-redux";
+import {RootState} from "../../state/store.ts";
 import axios from "axios";
+
 import FileInputAddEvent from "../addEvent/components/fileInputAddEvent.tsx";
 
 function EditEventPage() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
+    const [price, setPrice] = useState(0);
     const [image, setImage] = useState('');
     const [startDate, setStartDate] = useState(dayjs());
     const [endDate, setEndDate] = useState(dayjs());
-
+  
     const [nameError, setNameError] = useState(false);
     const [descriptionError, setDescriptionError] = useState(false);
     const [priceError, setPriceError] = useState(false);
@@ -48,8 +51,6 @@ function EditEventPage() {
         } else {
             setPriceError(false);
         }
-
-
         if (image.trim() === '') {
             setImageError(true);
             isValid = false;
@@ -60,31 +61,46 @@ function EditEventPage() {
         return isValid;
     };
 
-    const postEvent = () => {
-        if (!validateForm()) {
-            console.log('form is not valid')
-            return;
-        }
+    const editEventId = useSelector((state: RootState) => state.editEventId.editEventId);
+    console.log(editEventId);
 
-        const event = {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // fetch event data
+        axios.get(`http://localhost:3000/api/wydarzenia/${editEventId}`)
+            .then(response => {
+                setName(response.data.name);
+                setDescription(response.data.description);
+                setPrice(response.data.price);
+                setImage(response.data.image);
+                setStartDate(dayjs(response.data.startDate));
+                setEndDate(dayjs(response.data.endDate));
+            })
+            .catch(error => {
+                console.error('error fetching event: ', error)
+            })
+    }, []);
+
+    const handleSave = () => {
+        // save event
+        axios.put(`http://localhost:3000/api/wydarzenia/${editEventId}`, {
             name: name,
             description: description,
             price: price,
             image: image,
-            startDate: startDate,
-            endDate: endDate,
-            serviceProviderId: serviceProviderId
-        }
-
-        axios.post('http://localhost:3000/api/wydarzenia', event)
+            startDate: startDate.toISOString(),
+            endDate: endDate.toISOString()
+        })
             .then(response => {
                 console.log(response.data);
-                navigate("/home")
+                navigate("/home");
             })
             .catch(error => {
-                console.error('error posting event: ', error)
+                console.error('error saving event: ', error)
             })
     }
+
 
     return (
         <div className="container-event">
@@ -92,7 +108,7 @@ function EditEventPage() {
                 <div className="first-row-event">
                     <h1>Edytuj Ofertę/Event</h1>
                     <div className="buttons-save-discard">
-                        <button className="save-button" onClick={postEvent}>Zapisz</button>
+                        <button className="save-button" onClick={handleSave}>Zapisz</button>
                         <button className="discard-button" onClick={() => navigate("/home")}>Odrzuć</button>
                     </div>
                 </div>
@@ -128,6 +144,8 @@ function EditEventPage() {
             </div>
         </div>
     );
+
+
 }
 
 export default EditEventPage;
