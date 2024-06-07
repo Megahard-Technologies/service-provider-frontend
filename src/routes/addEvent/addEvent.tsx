@@ -131,7 +131,7 @@ function AddEventPage() {
                     <InputBoxAddEvent value={price} onChange={(event) => setPrice(event.currentTarget.value)}
 
                                       label="Cena" error={priceError}/>
-                    <FileInputAddEvent onChange={(base64: string) => setImage(base64)} label="Dodaj zdjęcie" error={imageError}/>
+                    <FileInputAddEvent onChange={(base64: string) => setImage(base64)} label="Dodaj zdjęcie" error={imageError} existingImage={image}/>
 
                 </form>
             </div>

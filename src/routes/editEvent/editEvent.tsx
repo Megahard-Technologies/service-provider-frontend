@@ -14,7 +14,7 @@ import FileInputAddEvent from "../addEvent/components/fileInputAddEvent.tsx";
 function EditEventPage() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState('');
     const [image, setImage] = useState('');
     const [startDate, setStartDate] = useState(dayjs());
     const [endDate, setEndDate] = useState(dayjs());
@@ -25,7 +25,6 @@ function EditEventPage() {
     const [imageError, setImageError] = useState(false);
 
 
-    const serviceProviderId = 1;
     const navigate = useNavigate();
 
     const validateForm = () => {
@@ -45,7 +44,7 @@ function EditEventPage() {
             setDescriptionError(false);
         }
 
-        if (price.trim() === '' || isNaN(Number(price))) {
+        if (price === '' || isNaN(Number(price))) {
             setPriceError(true);
             isValid = false;
         } else {
@@ -64,7 +63,6 @@ function EditEventPage() {
     const editEventId = useSelector((state: RootState) => state.editEventId.editEventId);
     console.log(editEventId);
 
-    const navigate = useNavigate();
 
     useEffect(() => {
         // fetch event data
@@ -83,12 +81,25 @@ function EditEventPage() {
     }, []);
 
     const handleSave = () => {
+        // validate form
+        if (!validateForm()) {
+            console.log('form is not valid')
+            return;
+        }
+
+        let base64Image;
+        if (image.includes(',')) {
+            base64Image = image.split(',')[1];
+        } else {
+            base64Image = image;
+        }
+
         // save event
         axios.put(`http://localhost:3000/api/wydarzenia/${editEventId}`, {
             name: name,
             description: description,
             price: price,
-            image: image,
+            image: base64Image,
             startDate: startDate.toISOString(),
             endDate: endDate.toISOString()
         })
@@ -139,7 +150,7 @@ function EditEventPage() {
 
                     <InputBoxAddEvent value={price} onChange={(event) => setPrice(event.currentTarget.value)}
                                       label="Cena" error={priceError}/>
-                    <FileInputAddEvent onChange={(base64: string) => setImage(base64)} label="Dodaj zdjęcie" error={imageError}/>
+                    <FileInputAddEvent onChange={(base64: string) => setImage(base64)} label="Nowy obraz" error={imageError}/>
                 </form>
             </div>
         </div>
