@@ -20,26 +20,45 @@ interface event {
     price: number;
 }
 
+interface opinion {
+    stars: number;
+    description: string;
+    date: Date;
+}
+
 function Home() {
     const name = "Zatoka smaku";
     const [message, setMessage] = useState('');
     const [events, setEvents] = useState<event[]>([]);
+    const [opinions, setOpinions] = useState<opinion[]>([]); // New state
     const [loading, setLoading] = useState(true); // Single state for both sections
     const [eventsUpdated, setEventsUpdated] = useState(false); // State to track events updates
+  
     const navigate = useNavigate();
+
+    const serviceProviderId = 1;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/wydarzenia');
                 setEvents(response.data);
-            } catch (error) {
-                console.error('error fetching events: ', error);
-            }
-        };
+            })
+            .catch(error => {
+                console.error('error fetching events: ', error)
+            })
+          
+        axios.get(`http://localhost:3000/api/opinions/${serviceProviderId}`)
+            .then(response => {
+                setOpinions(response.data);
+            })
+            .catch(error => {
+                console.error('error fetching opinions: ', error)
+            })
+
 
         fetchData();
-        setEventsUpdated(false); // Reset eventsUpdated after fetching events
+        setEventsUpdated(false); 
 
         // Set a timeout to ensure minimum loading time of 5 seconds
         const timer = setTimeout(() => {
@@ -64,14 +83,10 @@ function Home() {
                         {loading ? (
                             <LoadingSpinner />
                         ) : (
-                            <>
-                                <Opinion name={"Jarek S."} stars={4}
-                                         description={"To zdecydowanie jedna z tych Zatok, do której trzeba przycumować, gdy organizm zaczyna dopominać się smacznego jedzonka po intensywnym treningu. Jedzenie przede wszystkim bardzo dobrej jakości i w całkiem sporych porcjach, żadne tam mrożonki z Biedro. "}/>
-                                <Opinion name={"Ola B."} stars={5}
-                                         description={"Przychodzę tutaj od trzech lat, średnio dwa razy w tygodniu. Żeby jako zmęczony i głodny student zjeść hot dogi i wypić kawę. Najczęściej na zmianę Dawida i Asi których serdecznie pozdrawiam bo są super i robią super kawę, kolejny powód dla którego warto tutaj przyjść."}/>
-                                <Opinion name={"Adam C."} stars={4}
-                                         description={"Jako studentka przychodzę często do Zatoki smaku na kawę. Uważam, że posiadają bardzo pyszne ziarna. Polecam dla smakoszy słodkiego Moche. Obsłuaga także bardzo zadawalająca, miła, komunikatywna i przyjemna. Najbardziej polecam zmianę Asi i Dawida ;)"}/>
-                            </>
+                            {opinions.map((opinion, index) => {
+                            return <Opinion key={index} stars={opinion.stars} description={opinion.description}
+                                            date={opinion.date}/>
+                        })}
                         )}
                     </div>
                 </div>

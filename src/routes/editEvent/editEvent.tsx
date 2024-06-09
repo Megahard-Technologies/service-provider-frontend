@@ -4,7 +4,7 @@ import '../addEvent/addEvent.css';
 import BigInputAddEvent from "../addEvent/components/bigInputAddEvent.tsx";
 import {useNavigate} from "react-router-dom";
 import dayjs, {Dayjs} from 'dayjs';
-import {DateTimePicker} from "@mui/x-date-pickers";
+import {DateTimePicker, renderTimeViewClock} from "@mui/x-date-pickers";
 import {useSelector} from "react-redux";
 import {RootState} from "../../state/store.ts";
 import axios from "axios";
@@ -134,8 +134,13 @@ function EditEventPage() {
                             label="Data rozpoczęcia"
                             value={startDate}
                             onChange={(newDate) => setStartDate(newDate as Dayjs)}
-                            format="DD/MM/YYYY HH:MM"
+                            format="DD/MM/YYYY HH:mm"
                             ampm={false}
+                            viewRenderers={{
+                                hours: renderTimeViewClock,
+                                minutes: renderTimeViewClock,
+                                seconds: renderTimeViewClock,
+                            }}
                         />
 
                         <DateTimePicker
@@ -143,8 +148,13 @@ function EditEventPage() {
                             value={endDate}
                             onChange={(newDate) => setEndDate(newDate as Dayjs)}
                             ampm={false}
-                            format="DD/MM/YYYY HH:MM"
+                            format="DD/MM/YYYY HH:mm"
                             minutesStep={1}
+                            viewRenderers={{
+                                hours: renderTimeViewClock,
+                                minutes: renderTimeViewClock,
+                                seconds: renderTimeViewClock,
+                            }}
                         />
                     </div>
 

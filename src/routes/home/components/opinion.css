@@ -21,5 +21,7 @@
     background-color: #d9d9d9;
     padding: 15px;
     border-radius: 10px;
+    word-wrap: break-word; /* Add this line */
+    width: 91%;
 }
 
